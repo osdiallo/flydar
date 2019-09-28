@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongodb:stitch-android-core:4.4.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b476b0f7f849e0b0b0984dfc241dc60c/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b476b0f7f849e0b0b0984dfc241dc60c/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/stitch-android-core/4.4.1/63b57bc5e6ae1dd4311add8a999c60057b1b4cd3/stitch-android-core-4.4.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/stitch-android-core/4.4.1/e5f1394c50c4b28666ca560dd648bf35a3bf222d/stitch-android-core-4.4.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

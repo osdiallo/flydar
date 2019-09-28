@@ -1,4 +1,4 @@
-package  com.example.flydar.ui.login;
+package com.example.flydar.ui.login;
 
 import android.content.Intent;
 import android.app.Activity;
