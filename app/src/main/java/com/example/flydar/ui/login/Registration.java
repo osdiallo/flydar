@@ -58,7 +58,8 @@ public class Registration extends AppCompatActivity{
                 if(TextUtils.isEmpty(passText) || passText.length() < 5){
                     signupPass.setError("Password must be at least 5 characters");
                     return;
-                } else if(TextUtils.isEmpty(emailText) || !emailText.contains("@")){
+                } else if(TextUtils.isEmpty(emailText) || !emailText.contains("@") ||
+                            !emailText.contains(".com")){
                     signupEmail.setError("Invalid email address");
                     return;
                 } else if(TextUtils.isEmpty(phoneText) || phoneText.length() < 10){
@@ -95,6 +96,7 @@ public class Registration extends AppCompatActivity{
 
     private void submitForm(String newEmail, String newPass, String newPhone){
         JSONObject newUser = new JSONObject();
+        JSONArray userDB = new JSONArray();
 
         try{
             newUser.put("email", newEmail);
