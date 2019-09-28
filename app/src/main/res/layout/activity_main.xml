@@ -24,14 +24,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/menu"
+        android:id="@+id/create"
         style="@android:style/Widget.Material.Light.Button"
         android:layout_width="61dp"
         android:layout_height="53dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
+        android:background="@android:drawable/dialog_holo_dark_frame"
         android:fontFamily="sans-serif-medium"
+        android:text="+"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

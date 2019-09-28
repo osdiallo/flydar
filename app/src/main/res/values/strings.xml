@@ -11,4 +11,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="prompt_phone">Phone</string>
     <string name="flyers">Flyers</string>
+    <string name="create">Create an Event:</string>
+    <string name="eventTitle">Event Title</string>
+    <string name="eventTime">Event Time</string>
+    <string name="desc">Description of Event</string>
+    <string name="createB">Create</string>
 </resources>
