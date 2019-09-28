@@ -29,12 +29,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.stitch.android.core.auth.StitchUser;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
+import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoDatabase;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
+import com.mongodb.client.model.CreateCollectionOptions;
+import com.mongodb.client.model.TextSearchOptions;
+import org.bson.Document;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,7 +96,7 @@ public class Registration extends AppCompatActivity{
                             !emailText.contains(".com")){
                     signupEmail.setError("Invalid email address");
                     return;
-                } else if(TextUtils.isEmpty(phoneText) || phoneText.length() < 10){
+                } else if(TextUtils.isEmpty(phoneText) || phoneText.length() != 10){
                     signupPhone.setError("Invalid phone number");
                     return;
                 }
@@ -124,36 +129,26 @@ public class Registration extends AppCompatActivity{
     }
 
     private void submitForm(String newEmail, String newPass, String newPhone){
-        JSONObject newUser = new JSONObject();
-        JSONArray userDB = new JSONArray();
         RemoteMongoClient mongoClient = client.getServiceClient(
                 RemoteMongoClient.factory, "mongodb-atlas");
 
-        try(FileWriter jsonDB = new FileWriter("userDB.json");){
-            newUser.put("email", newEmail);
-            newUser.put("password", newPass);
-            newUser.put("phone", newPhone);
-            userDB.put(newUser);
+        RemoteMongoDatabase database = mongoClient.getDatabase("Users");
+        RemoteMongoCollection<Document> userDetails = database.getCollection("userInfo");
+        Document newUser = new Document();
 
-            jsonDB.write(userDB.toString());
-            jsonDB.flush();
+        btnRegister.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                newUser.put("name", newEmail);
+                newUser.put("password", newPass);
+                newUser.put("phone", newPhone);
+                userDetails.insertOne(newUser);
 
-            btnRegister.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(i);
-                }
-            });
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+            }
+        });
 
-        } catch (JSONException e){
-            // catch block
-            e.printStackTrace();
-        } catch (IOException e){
-            // catch block
-            System.out.println("This file ain't here chief");
-            e.printStackTrace();
-        }
     }
 
 }
