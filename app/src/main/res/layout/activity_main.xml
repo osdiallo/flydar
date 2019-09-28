@@ -11,26 +11,27 @@
         android:layout_width="0dp"
         android:layout_height="53dp"
         android:background="#666666"
+        android:clickable="true"
         android:paddingHorizontal="100dp"
         android:paddingVertical="4dp"
-        android:text="Flyers"
+        android:text="@string/flyers"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/menu"
-        style="@android:style/Widget.Material.Light.Button.Small"
+        style="@android:style/Widget.Material.Light.Button"
         android:layout_width="61dp"
         android:layout_height="53dp"
-        android:background="#242424"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:fontFamily="sans-serif-medium"
-        android:text="+"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +60,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:height="50"
+                android:height="50dp"
                 android:background="#4E4B4B"
                 android:text="This is some text, son."
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />

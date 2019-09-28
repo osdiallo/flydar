@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.flydar.MainActivity;
 import com.example.flydar.R;
 import com.example.flydar.ui.login.LoginViewModel;
 import com.example.flydar.ui.login.LoginViewModelFactory;
@@ -72,8 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                setContentView(R.layout.activity_main);
-                //finish();
+                finish();
             }
         });
 
@@ -128,7 +128,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
