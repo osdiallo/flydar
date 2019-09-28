@@ -2,6 +2,7 @@ package com.example.flydar.ui.login;
 
 import android.content.Intent;
 import android.app.Activity;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import com.example.flydar.R;
@@ -25,6 +27,8 @@ import com.example.flydar.MainActivity;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.mongodb.stitch.android.core.auth.StitchUser;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
@@ -40,16 +44,27 @@ public class Registration extends AppCompatActivity{
     ProgressBar progressBar;
     private EditText signupEmail, signupPass, signupPhone;
     private Button btnRegister;
-    final StitchAppClient client = Stitch.getDefaultAppClient();
+    private StitchAppClient client = Stitch.getDefaultAppClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        //Stitch.initializeDefaultAppClient(getString(R.string.flydar));
-        //client = Stitch.getDefaultAppClient();
-        client.getAuth().loginWithCredential(new AnonymousCredential());
+        client = Stitch.getDefaultAppClient();
+        client.getAuth().loginWithCredential(new AnonymousCredential())
+                .addOnCompleteListener(
+                        new OnCompleteListener<StitchUser>() {
+                            @Override
+                            public void onComplete(@NonNull Task<StitchUser> task) {
+                                if(task.isSuccessful()){
+                                    Log.d("stitch", "You good homie");
+                                } else {
+                                    Log.e("stitch", "failed to log in", task.getException());
+                                }
+                            }
+                        }
+                );
 
         progressBar = new ProgressBar(this);
         signupEmail = findViewById(R.id.username);
@@ -111,8 +126,8 @@ public class Registration extends AppCompatActivity{
     private void submitForm(String newEmail, String newPass, String newPhone){
         JSONObject newUser = new JSONObject();
         JSONArray userDB = new JSONArray();
-        //RemoteMongoClient mongoClient = stitchClient.getServiceClient(
-        //        RemoteMongoClient.factory, "mongodb-atlas");
+        RemoteMongoClient mongoClient = client.getServiceClient(
+                RemoteMongoClient.factory, "mongodb-atlas");
 
         try(FileWriter jsonDB = new FileWriter("userDB.json");){
             newUser.put("email", newEmail);
