@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongodb:stitch-core-services-aws:4.5.0@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/stitch-core-services-aws/4.5.0/a297ad14c002c3e2b6ec1245e28bd06b99aac451/stitch-core-services-aws-4.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/stitch-core-services-aws/4.5.0/d47838188100b991bd4b8b733754461103708dbd/stitch-core-services-aws-4.5.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

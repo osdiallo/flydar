@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongodb:stitch-android-services-fcm:4.5.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e81dec2d2d40b211434420aad810a646/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e81dec2d2d40b211434420aad810a646/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/stitch-android-services-fcm/4.5.0/ccfa2b33394a816d15b087f2f95c3ad95c1b2c8a/stitch-android-services-fcm-4.5.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -16,4 +16,5 @@
     <string name="eventTime">Event Time</string>
     <string name="desc">Description of Event</string>
     <string name="createB">Create</string>
+    <string name="stitch_client_app_id">flydar-mxwjp</string>
 </resources>

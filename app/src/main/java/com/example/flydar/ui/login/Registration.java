@@ -22,6 +22,15 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import com.example.flydar.R;
 import com.example.flydar.MainActivity;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import com.mongodb.stitch.android.core.auth.StitchUser;
+import com.mongodb.stitch.android.core.Stitch;
+import com.mongodb.stitch.android.core.StitchAppClient;
+import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
+import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
+import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,11 +40,16 @@ public class Registration extends AppCompatActivity{
     ProgressBar progressBar;
     private EditText signupEmail, signupPass, signupPhone;
     private Button btnRegister;
+    final StitchAppClient client = Stitch.getDefaultAppClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        //Stitch.initializeDefaultAppClient(getString(R.string.flydar));
+        //client = Stitch.getDefaultAppClient();
+        client.getAuth().loginWithCredential(new AnonymousCredential());
 
         progressBar = new ProgressBar(this);
         signupEmail = findViewById(R.id.username);
@@ -97,11 +111,17 @@ public class Registration extends AppCompatActivity{
     private void submitForm(String newEmail, String newPass, String newPhone){
         JSONObject newUser = new JSONObject();
         JSONArray userDB = new JSONArray();
+        //RemoteMongoClient mongoClient = stitchClient.getServiceClient(
+        //        RemoteMongoClient.factory, "mongodb-atlas");
 
-        try{
+        try(FileWriter jsonDB = new FileWriter("userDB.json");){
             newUser.put("email", newEmail);
             newUser.put("password", newPass);
             newUser.put("phone", newPhone);
+            userDB.put(newUser);
+
+            jsonDB.write(userDB.toString());
+            jsonDB.flush();
 
             btnRegister.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -113,6 +133,10 @@ public class Registration extends AppCompatActivity{
 
         } catch (JSONException e){
             // catch block
+            e.printStackTrace();
+        } catch (IOException e){
+            // catch block
+            System.out.println("This file ain't here chief");
             e.printStackTrace();
         }
     }
